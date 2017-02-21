@@ -1,0 +1,33 @@
+<div id="clearance" class="sign-up">
+  <h2><%= t(".title") %></h2>
+
+  <%= form_for(@user, remote: true) do |form| %>
+    <div id="error_explanation">
+      <% if @user.errors.any? %>
+          <h2>
+            <%= pluralize(@user.errors.count, "error") %> found.
+          </h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+      <% end %>
+    </div>
+
+    <%= render partial: '/users/form', object: form %>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    <div class="other-links">
+      <%= link_to t(".sign_in"), sign_in_path %>
+    </div>
+
+    <div class="other-links">
+      <%= link_to t(".sign_out"), sign_out_path %>
+    </div>
+
+  <% end %>
+</div>

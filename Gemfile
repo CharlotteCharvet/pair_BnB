@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 2.5'
 # bundle Clearance as gem
 gem 'clearance'
 
+#protect the secret key
+gem "figaro"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

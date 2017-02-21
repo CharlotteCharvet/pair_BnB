@@ -29,6 +29,11 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # bundle Clearance as gem
 gem 'clearance'
+# bundle figaro
+gem 'figaro'
+# omniauth and omniauth-facebook
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

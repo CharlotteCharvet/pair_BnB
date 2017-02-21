@@ -29,6 +29,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # bundle Clearance as gem
 gem 'clearance'
+# bundle figaro
+gem 'figaro'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

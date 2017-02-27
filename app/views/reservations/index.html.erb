@@ -1,0 +1,23 @@
+
+<div class="container">
+  <h2>Your reservation :</h2>           
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Listing id </th>
+        <th>Start date</th>
+        <th>End date</th>
+      </tr>
+    </thead>
+    <% @reservation = Reservation.where(user_id: current_user.id).where(listing_id: params[:listing_id]) %> 
+    <tbody>
+    <% @reservation.each do |resa| %>
+      <tr>
+        <td><%= resa.listing_id %></td>
+        <td><%= resa.start_date %></td>
+        <td><%= resa.end_date %></td>
+      </tr>
+    </tbody>
+    <%end%>
+  </table>
+</div>

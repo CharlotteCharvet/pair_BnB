@@ -1,0 +1,12 @@
+<%= form_for :tag, url: listing_tags_path(params[:listing_id]) do |form| %>
+
+	<div class="text-field">
+		<%= form.label :name %>
+		<%= form.text_field :name, type: 'name' %>
+	</div>
+
+	<div class="submit-field">
+    	<%= form.submit %>
+	</div>
+
+<% end %>

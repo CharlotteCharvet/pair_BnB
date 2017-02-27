@@ -1,0 +1,59 @@
+<%= form_for :listing, url: user_listings_path do |form| %>
+
+  <div class="text-field">
+    <%= form.label :title %>
+    <%= form.text_field :title, type: 'title' %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :description %>
+    <%= form.text_field :description, type: 'description' %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :address %>
+    <%= form.text_field :address, type: 'address' %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :city %>
+    <%= form.text_field :city, type: 'city' %>
+  </div>
+
+  <div class="number-field">
+    <%= form.label :price %>
+    <%= form.number_field :price, type: 'price' %>
+  </div>
+
+  <div class="number-field">
+    <%= form.label :max_guests %>
+    <%= form.number_field :max_guests, type: 'max_guests' %>
+  </div>
+
+  <div class="date-field">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date, type: 'date' %>
+  </div>
+  <div class="date-field">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date, type: 'date' %>
+  </div>
+
+  <div class="number-field">
+    <% Tag.all.each do |tag| %> 
+      <%= check_box_tag "listing[tag_ids][]", tag.id %>
+      <%= tag.name %></br>
+      <% end %>
+  </div>
+
+  <div class="file-field">
+    <%= form.label :photos %>
+    <%= form.file_field :photos, multiple: true %>
+  </div>
+
+
+  <div class="submit-field">
+    <%= form.submit %>
+  </div>
+
+<% end %>

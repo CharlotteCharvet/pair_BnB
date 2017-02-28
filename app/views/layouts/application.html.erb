@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
   <!-- Latest compiled and minified CSS -->
@@ -11,14 +12,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-  $.getScript('//cdn.jsdelivr.net/isotope/1.5.25/jquery.isotope.min.js',function(){
-    $('#projects_container').isotope({
-      itemSelector : '.project_item',
-      layoutMode : 'fitRows'
-    });
-  });
-</script>
+
 
 </head>
 <body>

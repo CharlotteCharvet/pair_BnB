@@ -39,6 +39,7 @@ gem 'omniauth-facebook'
 gem 'faker'
 
 gem 'figaro'
+gem 'braintree'
 
 #pagination
 gem 'kaminari'

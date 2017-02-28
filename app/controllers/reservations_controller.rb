@@ -1,11 +1,12 @@
 class ReservationsController < ApplicationController
-
+include ApplicationHelper
 
 
 
 
 	def index
 		@reservations = Reservation.all
+		@listing=Listing.find_by(id: params[:listing_id])
 	end
 
 	def new
@@ -14,6 +15,7 @@ class ReservationsController < ApplicationController
 
 	def create
 		@reservation = current_user.reservations.new(reservation_params)
+
 		@reservation.listing_id = params[:listing_id]
 		@other_resa = Reservation.where(listing_id: @reservation.listing_id)
 
@@ -25,10 +27,13 @@ class ReservationsController < ApplicationController
 				end
 			end
 		end
+		
+
+		
 
 		if @reservation.save 
 			flash[:succes] = "Succefully booked"
-			redirect_to  listing_reservations_path(params[:listing_id]) 
+			redirect_to braintree_new_path({reservation_id: @reservation.id})
 		else 
 			flash[:error] = "An error occured during the booking" 
 	 		render :new and return

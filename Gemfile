@@ -38,6 +38,8 @@ gem 'omniauth-facebook'
 
 gem 'faker'
 
+gem 'sidekiq'
+
 gem 'figaro'
 gem 'braintree'
 

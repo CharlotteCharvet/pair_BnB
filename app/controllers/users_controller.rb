@@ -12,6 +12,8 @@ class UsersController < Clearance::UsersController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        UserNotifierMailer.send_signup_email(@user).deliver
+
         format.html { redirect_to sign_in_path, notice: "User was successfully created." }
         # format.js {}
         format.json { render json: @user, status: :created }

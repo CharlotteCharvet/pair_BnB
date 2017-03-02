@@ -14,6 +14,7 @@ include ApplicationHelper
 	end
 
 	def create
+		@user = User.find_by(id: current_user.id)	
 		@reservation = current_user.reservations.new(reservation_params)
 
 		@reservation.listing_id = params[:listing_id]
@@ -27,12 +28,13 @@ include ApplicationHelper
 				end
 			end
 		end
-		
 
-		
+
+
 
 		if @reservation.save 
-			flash[:succes] = "Succefully booked"
+			ReservationJob.perform_later current_user
+			flash[:succes] = "Succefully booked, don't forget to proceed to payment"
 			redirect_to braintree_new_path({reservation_id: @reservation.id})
 		else 
 			flash[:error] = "An error occured during the booking" 
@@ -55,31 +57,32 @@ end
 #####
 
 # def create
+# 		@user = User.find_by(id: current_user.id)	
 # 		@reservation = current_user.reservations.new(reservation_params)
+
 # 		@reservation.listing_id = params[:listing_id]
 # 		@other_resa = Reservation.where(listing_id: @reservation.listing_id)
-# 		if @other_resa.nil?
-# 			if @reservation.save 
-# 				flash[:succes] = "Succefully booked"
-# 				redirect_to  listing_reservations_path(params[:listing_id]) 
-# 			else 
-# 				flash[:error] = "An error occured during the booking" 
-# 		 		render :new
-# 		 	end
-# 		else
+
+# 		if @other_resa.present?
 # 			@other_resa.each do |resa|
-# 			if @reservation.overlaps?(resa)
-# 					flash[:error] = "Reservation overlaps" 
-# 				 	render :new
-# 				else
-# 					if @reservation.save 
-# 						flash[:succes] = "Succefully booked"
-# 						redirect_to  listing_reservations_path(params[:listing_id]) 
-# 					else 
-# 						flash[:error] = "An error occured during the booking" 
-# 				 		render :new
-# 				 	end
-# 			end
+# 				if @reservation.overlaps?(resa)
+# 						flash[:error] = "Reservation overlaps" 
+# 					 	render :new and return
+# 				end
 # 			end
 # 		end
+
+
+
+
+# 		if @reservation.save 
+# 			ReservationJob.perform_later current_user
+			
+# 			flash[:succes] = "Succefully booked"
+# 			redirect_to braintree_new_path({reservation_id: @reservation.id})
+# 		else 
+# 			flash[:error] = "An error occured during the booking" 
+# 	 		render :new and return
+# 	 	end
 # 	end
+

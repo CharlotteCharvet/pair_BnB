@@ -2,8 +2,12 @@ class ListingsController < ApplicationController
 
 
   def index
+    
+
     @listings = Listing.all
-    @listing = Listing.where(id: current_user.id)
+      @listing = Listing.where(id: current_user.id)
+
+    
 
   end
 

@@ -23,8 +23,11 @@
         <td><%= resa.listing_id %></td>
         <td><%= resa.start_date %></td>
         <td><%= resa.end_date %></td>
+        <td><%= resa.status%></td>
+      <% if resa.status == "pending" %>
         <td><%= link_to "Make Payment", braintree_new_path %></td>
 
+      <%end%>
         
       </tr>
     </tbody>

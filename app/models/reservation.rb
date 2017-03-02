@@ -2,6 +2,8 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :listing
 
+  enum status: [:pending, :paid]
+
    validates_presence_of :start_date, :end_date
 
   # Check if a given interval overlaps this interval    

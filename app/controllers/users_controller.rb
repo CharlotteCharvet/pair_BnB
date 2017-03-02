@@ -1,11 +1,35 @@
 class UsersController < Clearance::UsersController
 
   def index
-    @listings = Listing.all.page(params[:page]).per(9)
+    @listings = Listing.all.order("created_at DESC").page(params[:page]).per(6)
+
+     # @listings = Listing.search(params[:search]) unless params[:search].blank?
+     # @listings = @listings.city unless params[:city].blank?
+
+    # @Listings = Listing.all 
+    # @Listings = @listings.city(params[:city]) if params[:city].present?
+    # @Listings = @listings.price(params[:price]) if params[:price].present?
+    # @listings = @Listings.all.order("created_at DESC").page(params[:page]).per(6)
+
+    @listings = @listings.similar_to(params[:query]) if params[:query].present?
+    
+
+
+
+    #if params[:city]
+      #@Listings = Product.where(nil)
+      #@listing = @listing.status(params[:tag]) if params[:tag].present?
+      #@Listings = @listings.city(params[:city]) if params[:city].present?
+      #@listings = Listing.city
+
+      #@listing = @listing.starts_with(params[:starts_with]) if params[:starts_with].present?
+    #end
+
   end
 
   def show
     @listings = Listing.all
+
   end
 
   def create

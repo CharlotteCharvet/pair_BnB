@@ -23,6 +23,8 @@ class BraintreeController < ApplicationController
      )
 
     if result.success?
+      @reservation.paid!
+      
       redirect_to listing_reservations_path(listing.id), :flash => { :success => "Transaction successful!" }
     else
       redirect_to new_listing_reservation_path(listing.id), :flash => { :error => "Transaction failed. Please try again." }

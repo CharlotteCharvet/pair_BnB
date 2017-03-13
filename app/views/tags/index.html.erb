@@ -1,0 +1,16 @@
+<h3>Tell us more about your property : <h3>
+
+<%= form_for(:tag) do |f| %>
+
+ <div class="field">
+  <%= f.label "Affiner votre propriété" %><br />
+  <%= f.collection_check_boxes :tag_id, Tag.all,:id, :name do |b| %>
+    <div class="collection-check-box">
+      <%= b.check_box %>
+      <%= b.label %>
+    </div>
+  <% end %>
+  <%= f.submit %>
+</div>
+
+ <% end %>

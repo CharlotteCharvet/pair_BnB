@@ -1,9 +1,66 @@
-<h2>This is the index page</h2>
 
-<%= link_to "Sign in with Facebook", "/auth/facebook" %>
+<div  class="container">
+    <h1>Vous partez en voyage ? Réservez des logements uniques et vivez là-bas comme des locaux.</h1>
+    <p></p>
+<!-- 
+    <div class="input-group input-group-lg">
+       <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+    </div> -->
 
-    <div class="other-links">
-      <%= button_to "Sign Out", sign_out_path, method: :delete %>
+
+
+<%= form_tag users_path, method: :get, class: 'form-group' do %>
+  <%= text_field_tag :query, params[:query], class: 'form-control search-bar' %>
+  <%= submit_tag "GO", name: nil, class: 'btn btn-default submit-button' %>
+<% end %>
+
+</div>
+
+  <p></p>
+
+
+
+
+<div class="container row centrer">
+
+<% @listings.each do |l| %>
+
+    <div style="margin-top: 48px; margin-bottom: 48px;">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+    
+      
+        <div class="thumbnail ">
+
+          <% if l.photos.present? %>
+            <% l.photos.each do |photo| %>
+              <p><%= image_tag photo, class: "img-responsive" %></p>
+            <% end %>
+          <% else %>   
+              <img src="test_airbnb.png" alt="...">  
+          <% end %>
+
+          <div class="caption">
+          <h3><%=link_to l.title, user_listing_path(current_user.id,l.id) %></h3>
+          <h4><%= l.description %></h4>
+          <% selection = ListingTag.where(listing_id: l.id) %>
+      		<% g = selection.pluck(:tag_id)%>
+        		<% g.each do |num|%>
+          		<% resultat=Tag.find_by(id: num) %>
+          		<h6><%= resultat.name %> </h6>
+        		<% end %>
+    		
+            <p ><%= link_to 'book', new_listing_reservation_path(l.id), { :class => "btn btn-primary"} %>  </p>
+          </div>
+        </div>
+      
+       </div>
     </div>
+    <% end %>
+</div>
+    <%= paginate @listings %>
+</div>
 
     

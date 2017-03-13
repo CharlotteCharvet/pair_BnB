@@ -1,4 +1,32 @@
-<%= @user.name %>
 <% @listings.each do |l| %>
-	<%= l.name %>
+	<% if current_user.id == l.user_id %>
+	<div class="row listing">
+		<div class=col-md-12 col-md-offset-2">
+			<div class="thumbnail">
+				<% if l.photos.present? %>
+					<% l.photos.each do |photo| %>
+						<p><%= image_tag photo, class: "img-responsive" %></p>
+					<% end %>
+				<% end %>
+				
+				<div class="caption">
+					<h3><%= l.title %></h3>
+					<h4><%= l.description %></h4>
+					<% selection = ListingTag.where(listing_id: l.id) %>
+					<% g = selection.pluck(:tag_id)%>
+						<% g.each do |num|%>
+							<% resultat=Tag.find_by(id: num) %>
+							<h6><%= resultat.name %> </h6>
+						<% end %>
+				</div>
+
+
+					
+					<p><%= link_to 'update', edit_user_listing_path(current_user.id,l.id), { :class => "btn btn-primary"} %>  </p>
+					<p><%= button_to 'delete', user_listing_path(current_user.id,l.id), method: :delete %>  </p>
+			</div>
+		<% end %>
+
 <% end %>
+		</div>		
+	</div>

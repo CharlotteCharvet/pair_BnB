@@ -13,6 +13,7 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -34,6 +35,27 @@ gem 'figaro'
 # omniauth and omniauth-facebook
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+gem 'faker'
+
+gem 'sidekiq'
+
+gem 'figaro'
+gem 'braintree'
+
+#pagination
+gem 'kaminari'
+
+#to manage the cloud
+gem 'fog'
+
+gem "mini_magick"
+
+#upload images
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+
+#search multisearch
+gem 'pg_search'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
